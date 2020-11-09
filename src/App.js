@@ -6,6 +6,7 @@ import { People, Person } from './components/People'
 import { Planets, Planet } from './components/Planets'
 import { Starships, Starship } from './components/Starships'
 import './App.css';
+import axios from 'axios';
 
 function App() {
 
@@ -36,8 +37,19 @@ function App() {
   const searchSwapi = e => {
     e.preventDefault()
     // console.log(starwarsState, id)
-    navigate(`${starwarsState}/${theID}`)
+    navigate(`/${starwarsState}/${theID}`)
+    axios.get(`https://swapi.dev/api/${starwarsState}/${theID}`).then(
+      res => setData(prevData => {
+        return {
+          ...prevData,
+          data: {
+            [starwarsState]: res.data
+          }
+        }
+      })
+    )
   }
+
 
   // const switchItem = () => {
   //   switch (starwarsState) {
