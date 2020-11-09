@@ -39,33 +39,15 @@ function App() {
     // console.log(starwarsState, id)
     navigate(`/${starwarsState}/${theID}`)
     axios.get(`https://swapi.dev/api/${starwarsState}/${theID}`).then(
-      res => setData(prevData => {
-        return {
-          ...prevData,
-          data: {
-            [starwarsState]: res.data
-          }
+      res => setData(prevData => ({
+        // ...prevData,
+        data: {
+          ...prevData.data,
+          [starwarsState]: res.data
         }
-      })
+      }))
     )
   }
-
-
-  // const switchItem = () => {
-  //   switch (starwarsState) {
-  //     case 'people':
-  //       <Link path='/people/' />;
-  //       break;
-  //     case 'planets':
-  //       <Link path="/planets/" />;
-  //       break;
-  //     case 'starships':
-  //       <Link path='/starships/' />;
-  //       break;
-  //     default:
-  //       return null;
-  //   }
-  // }
 
   return (
     <div className="App">
@@ -87,13 +69,13 @@ function App() {
 
       <Router>
         <People path='/people/'>
-          <Person path=':personId' />
+          <Person path=':personId' data={data.people} />
         </People>
         <Planets path="/planets/">
-          <Planet path=':planetId' />
+          <Planet path=':planetId' data={data.planets} />
         </Planets>
         <Starships path='/starships/'>
-          <Starship path=':starshipId' />
+          <Starship path=':starshipId' data={data.starships} />
         </Starships>
       </Router>
 

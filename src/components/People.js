@@ -4,16 +4,6 @@ import axios from 'axios'
 import { Link } from '@reach/router';
 
 export const People = props => {
-
-  const [peopleData, setPeopleData] = useState([]);
-
-  // useEffect(() => {
-  //   axios.get(`https://swapi.dev/api/people/${props.theID}`)
-  //     .then(response => { setpeopleData(response.data) })
-
-  //   console.log(peopleData)
-  // }, []);
-
   return (
     <div>
       <span> the People have spoken</span>
@@ -25,6 +15,8 @@ export const People = props => {
 }
 
 export const Person = props => {
+  // const [name, setName] = useState('')
+
   // useEffect(() => {
   //   axios.get(`https://swapi.dev/api/people/${props.theID}`)
   //     .then(response => { setpeopleData(response.data) })
