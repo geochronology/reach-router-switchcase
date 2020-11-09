@@ -3,21 +3,32 @@ import axios from 'axios'
 
 import { Link } from '@reach/router';
 
-const Planets = props => {
+export const Planets = props => {
 
-  const [peopleData, setpeopleData] = useState([]);
-  useEffect(() => {
-    axios.get(`https://swapi.dev/api/people/${props.theID}`)
-      .then(response => { setpeopleData(response.data) })
+  // const [planetData, setPlanetData] = useState([]);
 
-    console.log(peopleData)
-  }, []);
   return (
     <div>
-      <span> the People have spoken</span>
-      <Link to='/people' />
+      <span> the Planets have spoken</span>
+      {/* <Link to='/people' /> */}
+      {props.children}
+
     </div>
   )
 }
 
-export default Planets;
+
+export const Planet = props => {
+  // useEffect(() => {
+  //   axios.get(`https://swapi.dev/api/people/${props.theID}`)
+  //     .then(response => { setpeopleData(response.data) })
+
+  //   console.log(peopleData)
+  // }, []);
+
+  return (
+    <div>
+      Planet Data
+    </div>
+  )
+}
