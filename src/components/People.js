@@ -1,4 +1,5 @@
 import React from 'react'
+import { StarwarsContext, StarwarsProvider } from "../App"
 
 export const People = props => {
   return (
@@ -10,11 +11,13 @@ export const People = props => {
   )
 }
 
-export const Person = props => {
+export const Person = () => {
+
+  const { category, theID } = React.useContext(StarwarsContext)
 
   return (
     <div>
-      Person Data
+      /{category}/{theID}
     </div>
   )
 }

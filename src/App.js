@@ -23,9 +23,8 @@ export default function App() {
   )
 }
 
-
 // CREATE CONTEXT
-const StarwarsContext = createContext()
+export const StarwarsContext = createContext()
 
 // CONTEXT PROVIDER
 function StarwarsProvider({ children }) {
@@ -53,6 +52,11 @@ function StarwarsProvider({ children }) {
     </StarwarsContext.Provider>
   )
 }
+
+
+
+
+
 
 // APP CONTENT
 const AppContent = memo(() => {
