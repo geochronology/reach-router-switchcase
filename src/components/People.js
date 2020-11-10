@@ -6,7 +6,6 @@ export const People = props => {
   return (
     <div>
       <span> the People have spoken</span>
-
       {props.children}
     </div>
   )
