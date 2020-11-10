@@ -5,21 +5,27 @@ import React, {
   useContext,
   memo
 } from 'react'
+import { ReactQueryDevtools } from "react-query-devtools";
 import { useWhatChanged } from "@simbathesailor/use-what-changed";
-import { Router, Link, navigate } from "@reach/router";
+import { Router, navigate } from "@reach/router";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { People, Person } from './components/People'
 import { Planets, Planet } from './components/Planets'
 import { Starships, Starship } from './components/Starships'
 import './App.css';
+import Axios from 'axios';
 
 
 // APP w/ CONTEXT PROVIDER
 export default function App() {
   return (
-    <StarwarsProvider>
-      <AppContent />
-    </StarwarsProvider>
+    <>
+      <StarwarsProvider>
+        <AppContent />
+      </StarwarsProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </>
+
   )
 }
 
@@ -46,16 +52,27 @@ function StarwarsProvider({ children }) {
       setCategory,
       theID,
       setTheID,
-      categories
+      categories,
+      fetchStarwarsData
     }}>
       <AppContent />
     </StarwarsContext.Provider>
   )
 }
 
+async function fetchStarwarsData(category, id) {
+  if (!id) {
+    return
+  }
 
-
-
+  const response = await Axios.get(
+    `https://swapi.dev/api/${category}/${id}`
+  ).then(res => res.data)
+  // const data = await response.json()
+  const data = response
+  // console.log(data)
+  return data
+}
 
 
 // APP CONTENT
@@ -103,13 +120,13 @@ const AppContent = memo(() => {
 
       <Router>
         <People path='/people/'>
-          <Person path=':personId' />
+          <Person path=':personId' fetchStarwarsData />
         </People>
         <Planets path="/planets/">
-          <Planet path=':planetId' />
+          <Planet path=':planetId' fetchStarwarsData />
         </Planets>
         <Starships path='/starships/'>
-          <Starship path=':starshipId' />
+          <Starship path=':starshipId' fetchStarwarsData />
         </Starships>
       </Router>
 
